@@ -1,0 +1,124 @@
+{
+  "version": "2.0.0",
+  "updated": "2026-10-10",
+  "hashes": {
+    "44d88612fea8a8f36de82e1278abb02f": {
+      "name": "EICAR-Test-File",
+      "severity": "test",
+      "algo": "md5"
+    },
+    "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f": {
+      "name": "EICAR-Test-File",
+      "severity": "test",
+      "algo": "sha256"
+    }
+  },
+  "strings": [
+    {
+      "id": "eicar",
+      "pattern": "EICAR-STANDARD-ANTIVIRUS-TEST-FILE",
+      "name": "EICAR-Test-File",
+      "severity": "test"
+    },
+    {
+      "id": "powershell_encoded",
+      "pattern": "powershell -enc",
+      "name": "Heuristic.PowerShell.Encoded",
+      "severity": "suspicious"
+    },
+    {
+      "id": "powershell_encoded2",
+      "pattern": "powershell.exe -encodedcommand",
+      "name": "Heuristic.PowerShell.Encoded",
+      "severity": "high"
+    },
+    {
+      "id": "cmd_download_cradle",
+      "pattern": "IEX (New-Object Net.WebClient)",
+      "name": "Heuristic.PowerShell.DownloadCradle",
+      "severity": "high"
+    },
+    {
+      "id": "invoke_expression",
+      "pattern": "invoke-expression",
+      "name": "Heuristic.PowerShell.IEX",
+      "severity": "medium"
+    },
+    {
+      "id": "frombase64",
+      "pattern": "frombase64string",
+      "name": "Heuristic.PowerShell.Base64",
+      "severity": "medium"
+    },
+    {
+      "id": "vbs_createobject",
+      "pattern": "CreateObject(\"WScript.Shell\")",
+      "name": "Heuristic.VBS.Shell",
+      "severity": "medium"
+    },
+    {
+      "id": "wmic_process",
+      "pattern": "wmic process call create",
+      "name": "Heuristic.WMIC.ProcessCreate",
+      "severity": "high"
+    },
+    {
+      "id": "bitsadmin",
+      "pattern": "bitsadmin /transfer",
+      "name": "Heuristic.BITS.Transfer",
+      "severity": "high"
+    },
+    {
+      "id": "certutil_decode",
+      "pattern": "certutil -decode",
+      "name": "Heuristic.Certutil.Decode",
+      "severity": "high"
+    },
+    {
+      "id": "regsvr32_scrobj",
+      "pattern": "regsvr32 /s /n /u /i:",
+      "name": "Heuristic.Regsvr32.Squiblydoo",
+      "severity": "high"
+    },
+    {
+      "id": "mshta_http",
+      "pattern": "mshta http",
+      "name": "Heuristic.MSHTA.Remote",
+      "severity": "high"
+    },
+    {
+      "id": "rundll32_javascript",
+      "pattern": "rundll32.exe javascript:",
+      "name": "Heuristic.Rundll32.JavaScript",
+      "severity": "high"
+    }
+  ],
+  "extensions_risk": [".js", ".vbs", ".ps1", ".bat", ".cmd", ".scr", ".dll", ".exe", ".hta", ".wsf", ".jse"],
+  "usb_block_extensions": [".exe", ".scr", ".bat", ".cmd", ".ps1", ".vbs", ".js", ".hta", ".msi", ".com", ".pif", ".wsf"],
+  "rules": [
+    {
+      "id": "rule_macro_dropper",
+      "name": "Heuristic.Office.MacroDropper",
+      "severity": "high",
+      "all": ["auto_open", "shell", "createobject"]
+    },
+    {
+      "id": "rule_ransomware_notes",
+      "name": "Heuristic.Ransomware.Note",
+      "severity": "high",
+      "any": ["your files have been encrypted", "bitcoin ransom", "decrypt your files"]
+    },
+    {
+      "id": "rule_keylogger_api",
+      "name": "Heuristic.Keylogger.API",
+      "severity": "medium",
+      "all": ["getasynckeystate", "setwindowshookex"]
+    },
+    {
+      "id": "rule_persistence_run",
+      "name": "Heuristic.Persistence.RunKey",
+      "severity": "medium",
+      "any": ["currentversion\\\\run", "currentversion/run", "schtasks /create"]
+    }
+  ]
+}
